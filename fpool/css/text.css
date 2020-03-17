@@ -1,0 +1,33 @@
+html,
+body { height: 100%; }
+.outer { height: 100%; padding: 100px 0 0 0 ; box-sizing: border-box ; }
+.A { height: 100px; margin: -100px 0 0; background:  
+    text-align: center;
+    line-height: 100px;
+    font-size: 30px;
+	text-align: center;
+	background:  url('../img/bg.jpg') center center/cover #BBE8F2;
+}
+.B { height: auto; background: #D9C666; }
+
+
+.layui-table-header {
+	overflow: visible;
+}
+.layui-table-box {
+    overflow: scroll;
+}
+.layui-table-body{
+	background-color: white;
+}
+.b-data label{
+	width: 200px;
+	margin: auto;
+	    color: #6c6461;
+	    font-size: 22px;
+	    text-align: center;
+	    display: block;
+	    padding: 20px;
+		border-bottom: 6px solid #c4b00e;
+}
+    

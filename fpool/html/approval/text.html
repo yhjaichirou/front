@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试layui</title>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/text.css" />
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<script type="text/javascript" src="../../js/jquery.nicescroll.min.js"></script>
+	</head>
+
+	<body>
+
+		<div class="outer">
+			<div class="A">
+				察右前旗贫困户 2019 年度帮扶政策措施到户到人统计表
+			</div>
+			<div class="B">
+				<div class="b-data">
+					<label>贫困户基本信息</label>
+					<div class="layui-card-body">
+						<table class="layui-table" id="table1" lay-filter="table1"></table>
+					</div>
+				</div>
+
+				<div class="b-data">
+					<label>产业扶贫</label>
+					<div class="layui-card-body">
+						<table class="layui-table" id="table2" lay-filter="table2"></table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</body>
+</html>
+<script type="text/html" id="xuhao">
+	{{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/javascript">
+	layui.use(['table', "laypage", "element", "laydate"], function() {
+		var table = layui.table,
+			form = layui.form,
+			$ = layui.jquery,
+			element = layui.element,
+			laypage = layui.laypage,
+			laydate = layui.laydate;
+		var genUrl = "127.0.0.1:8080/"
+		var contextPath = "approval/";
+		var currPageUrl = "form/";
+
+		render()
+
+		function render() {
+			table.render({
+				elem: '#table1',
+				url: "http://127.0.0.1:8080/approval/form/getLists",
+				cellMinWidth: 60,
+				// ,toolbar: '#toolbarDemo'
+				/* parseData: function(res){ //res 即为原始返回的数据
+						var obj = eval("("+res+")");
+					    return {
+					      "code": obj.code, //解析接口状态
+					      "msg": obj.msg, //解析提示文本
+					      "count": obj.count, //解析数据长度
+					      "data": obj.data //解析数据列表
+					    };
+				}, */
+				page: false,
+				cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+				/* ,where:{
+					depId:search
+				} */
+
+				cols: [
+					[ //标题栏
+						{
+							title: '序号',
+							width: 80,
+							templet: '#xuhao'
+						}, {
+							field: 'username',
+							title: '扶贫人员',
+							width: 80
+						} //rowspan即纵向跨越的单元格数
+						, {
+							field: 'idcard',
+							title: '身份证号',
+							width: 80
+						}, {
+							field: 'amount',
+							title: '乡（镇）',
+							width: 80
+						}, {
+							align: 'center',
+							title: '行政村'
+						} //colspan即横跨的单元格数，这种情况下不用设置field和width
+
+					]
+				],
+				parseData: function(res) {
+$("body .layui-table-box").niceScroll();
+				},
+				request: {
+					pageName: 'page' //页码的参数名称，默认：page
+						,
+					limitName: 'limit' //每页数据量的参数名，默认：limit
+				},
+				//完成回调
+				done: function(res, curr1) {
+					
+					$("body .layui-table-box").niceScroll();
+				}
+			});
+
+
+
+			table.render({
+				elem: '#table2',
+				url: "http://127.0.0.1:8080/approval/form/getLists",
+				// ,toolbar: '#toolbarDemo'
+				/* parseData: function(res){ //res 即为原始返回的数据
+						var obj = eval("("+res+")");
+					    return {
+					      "code": obj.code, //解析接口状态
+					      "msg": obj.msg, //解析提示文本
+					      "count": obj.count, //解析数据长度
+					      "data": obj.data //解析数据列表
+					    };
+				}, */
+				page: false,
+				cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+				/* ,where:{
+					depId:search
+				} */
+
+				cols: [
+					[ //标题栏
+						{
+							align: 'center',
+							title: '菜单式扶贫',
+							width: 490,
+							colspan: 13,
+							rowspan: 1
+						}, {
+							field: 'username',
+							title: '集中式光伏扶贫',
+							width: 80,
+							colspan: 1,
+							rowspan: 3
+						} //rowspan即纵向跨越的单元格数
+						, {
+							field: 'amount',
+							title: '委托经营',
+							width: 80,
+							colspan: 1,
+							rowspan: 3
+						}, {
+							field: 'amount',
+							title: '扶贫小额信贷',
+							width: 80,
+							colspan: 1,
+							rowspan: 3
+						}, {
+							field: 'amount',
+							title: '扶贫小额信贷贴息',
+							width: 80,
+							colspan: 1,
+							rowspan: 3
+						}, {
+							field: 'amount',
+							title: '企业带动',
+							width: 80,
+							colspan: 5,
+							rowspan: 3,
+							align: 'center'
+						}, {
+							field: 'amount',
+							title: '村集体经济（除委托经营）',
+							width: 80,
+							colspan: 1,
+							rowspan: 3
+						}
+						//colspan即横跨的单元格数，这种情况下不用设置field和width
+					],
+					[{
+							title: '种植业',
+							width: 80,
+							colspan: 2,
+							rowspan: 3
+						}, {
+							title: '养殖业',
+							width: 250,
+							colspan: 9,
+							rowspan: 1,
+							align: 'center'
+						}, {
+							title: '红旗大棚',
+							width: 80,
+							colspan: 1,
+							rowspan: 4
+						}, {
+							title: '菜单式合计',
+							width: 80,
+							colspan: 1,
+							rowspan: 4
+						}
+
+					],
+					[{
+						title: '牛肉',
+						width: 50,
+						colspan: 2,
+						rowspan: 2
+					}, {
+						title: '鸡蛋',
+						width: 50,
+						colspan: 2,
+						rowspan: 2
+					}, {
+						title: '生猪',
+						width: 50,
+						colspan: 2,
+						rowspan: 2
+					}, {
+						title: '圈舍',
+						width: 100,
+						colspan: 4,
+						rowspan: 1
+					}],
+					[{
+							title: '新建',
+							width: 50,
+							colspan: 2,
+							rowspan: 1
+						}, {
+							title: '维修',
+							width: 50,
+							colspan: 1,
+							rowspan: 1
+						}
+
+						, {
+							field: 'city',
+							title: '补贴金额',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '分红金额',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '贷款金额',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '贴息金额',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}
+
+						, {
+							field: 'city',
+							title: '企业名称',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '土地流转',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '代劳用工',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '订单合作',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}, {
+							field: 'city',
+							title: '其他项目',
+							width: 80,
+							colspan: 1,
+							rowspan: 2
+						}
+					],
+					[{
+							field: 'province',
+							title: '补贴数量',
+							width: 25
+						}, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+						, {
+							field: 'province',
+							title: '补贴数量',
+							width: 25
+						}, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+						, {
+							field: 'province',
+							title: '补贴数量',
+							width: 25
+						}, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+						, {
+							field: 'province',
+							title: '补贴数量',
+							width: 25
+						}, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+						, {
+							field: 'province',
+							title: '补贴数量',
+							width: 25
+						}, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+						, {
+							field: 'city',
+							title: '补贴金额',
+							width: 25
+						}
+
+
+					]
+				],
+				parseData: function(res) {
+
+				},
+				request: {
+					pageName: 'page' //页码的参数名称，默认：page
+						,
+					limitName: 'limit' //每页数据量的参数名，默认：limit
+				},
+				//完成回调
+				done: function(res, curr1) {
+
+				}
+			});
+
+		}
+
+
+	})
+</script>
