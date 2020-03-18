@@ -1,0 +1,169 @@
+html,
+body {
+	height: 100%;
+	background-color: beige;
+}
+
+.outer {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.A {
+	height: 140px;
+	font-size: 30px;
+	text-align: center;
+	background: url('../img/bg.jpg') center center/cover #BBE8F2;
+}
+
+.B {
+	height: auto;
+	overflow: auto;
+	background-color: beige;
+	padding: 20px;
+}
+
+.A .title {
+	text-align: center;
+	padding: 20px;
+	font-size: 30px;
+	color: #004444;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.A .subtitle span {
+	color: #004444;
+	font-size: 24px;
+}
+
+.A .subtitle .subv {
+	text-align: center;
+	padding: 10px;
+	font-size: 24px;
+	color: red;
+}
+
+.model {
+	/* width: 100%; */
+}
+label{
+	font-weight: bold;
+}
+.model .glabel {
+	width: 100%;
+	background-color: white;
+	padding: 20px 0px 20px 0px ;
+}
+
+.model .xiding {
+	position: -webkit-sticky;
+	position: sticky;
+	text-align: center;
+	top: -27px;
+	z-index: 1;
+}
+
+.model .label {
+	width: 200px;
+	margin: auto;
+	border-bottom: 4px solid #006666;
+	color: #006666;
+	text-align: center;
+	font-size: 22px;
+	overflow: auto;
+	padding: 5px 0;
+}
+
+.model .list {
+	margin: 10px 10px 20px 10px;
+	background-color: white;
+	padding: 40px 20px 40px 100px;
+	border-radius: 10px;
+	position: relative;
+
+}
+
+.model .list .more {
+	position: absolute;
+	right: 18px;
+	top: 10px;
+	cursor: pointer;
+	padding: 2px 8px;
+	border: none;
+	border-radius: 10px;
+	transition: all 0.4;
+}
+
+.model .list .more:hover {
+	background-color: #eee;
+}
+.model .list strong {
+	margin-left: 5px;
+	color: cornflowerblue;
+}
+.model .list strong i{
+	color:#19be6b
+}
+
+.head-ul{
+	font-size: 16px;
+	padding-right: 100px;
+	overflow: auto;
+}
+.head-li{
+	line-height: 32px;
+}
+/* 基本信息 */
+.b-a-ul {
+	font-size: 16px;
+}
+
+.b-a-li {
+	line-height: 32px;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 列表信息 */
+.s-a-ul {
+	font-size: 16px;
+	overflow: auto;
+}
+
+
+
+.maxH {
+	max-height: 500px;
+}
+
+.s-b-ul {
+	margin-left: 20px;
+}
+
+.s-b-li {
+	position: relative;
+	border-bottom: 1px #eee solid;
+}
+
+.s-l-ul {
+	margin-left: 20px;
+}
+
+.s-l-li {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	border-bottom: 1px #eee solid;
+}
+
+.s-b-li:before,
+.s-l-li:before {
+	content: "|_";
+	position: absolute;
+	top: -7px;
+	left: -16px;
+	color: #aaa;
+}
