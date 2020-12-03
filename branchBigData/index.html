@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>扬州市产业地图</title>
+
+<script type="text/javascript" src = "https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+<script type="text/javascript" src = "jquery-3.3.1-min.js"></script>
+</head>
+<body>
+<div id="map" style="width: 1200px;height:900px;"></div>
+<script type="text/javascript">
+console.log(echarts)
+//container 为div的id 
+var dom = document.getElementById("map");
+//得到echarts的实例对象
+var myChart = echarts.init(dom);
+
+var optionMap = {
+        tooltip : {
+            trigger : 'item',
+            formatter : function(a) {
+                return "";
+            },
+            show:true,
+            alwaysShowContent: true,
+            enterable: true,
+            backgroundColor:'rgba(255,255,255,0.7)',
+            borderColor: '#019ADD',
+            borderWidth: 2,
+            padding: [5,10],
+            textStyle: {
+                color: '#000',
+            }
+        },
+        //地图坐标系必备的配置，具体的含义可以参考api
+        geo : {
+            roam : false,//是否开启缩放和平移
+            map : '360000',//地图名称
+            zoom : 1.2,//当前视角缩放比例
+            selectedMode : 'single',//选中模式
+            label : {
+                normal : {
+                    show : true,
+                    textStyle : {
+                        color : '#fff'
+                    }
+                },
+                emphasis : {
+                    show : true
+                }
+            },
+            itemStyle : {//地图区域的多边形 图形样式
+                hoverAnimation : false,
+                normal : {
+                    color : '#0065CF',
+                    borderColor : '#FFF'
+                },
+                emphasis : {
+                    areaColor : '#A6C5BD',
+                    borderColor : '#FFF',
+                    opacity : 1
+                }
+            }
+        },
+        series : [ {
+            type : 'effectScatter',//带有涟漪特效动画的散点（气泡）图
+            coordinateSystem : 'geo',
+            data : [{name:'1',value:[119.53,33.23,457]},
+            	{name:'2',value:[119.58,32.86,135]},
+            	{name:'3',value:[119.71,32.55,234]},
+            	{name:'4',value:[119.54,32.32,89]},
+            	{name:'5',value:[119.40,32.49,333]},
+            	{name:'6',value:[119.18,32.38,298]}],
+            symbol:'circle',
+            symbolSize : 5,
+            showEffectOn : 'render',
+            rippleEffect : {
+                scale : 10,
+                brushType : 'stroke'
+            },
+            hoverAnimation : true,
+            label : {
+                normal : {
+                    formatter : function(a){
+                        return "";
+                    },
+                    show : true,
+                    position:'inside',
+                    offset : [0 , 20],
+                    textStyle:{
+                        color:'#fff'
+                    }
+                }
+            },
+            itemStyle : {
+                normal : {
+                    color : '#f4e925',
+                    shadowBlur : 10,
+                    shadowColor : '#333'
+                }
+            },
+            zlevel : 1
+        },{
+            type : 'scatter',
+            coordinateSystem : 'geo',
+            data : [{name:'1',value:[119.53,33.23,457]},
+            	{name:'2',value:[119.58,32.86,135]},
+            	{name:'3',value:[119.71,32.55,234]},
+            	{name:'4',value:[119.54,32.32,89]},
+            	{name:'5',value:[119.40,32.49,333]},
+            	{name:'6',value:[119.18,32.38,298]}],
+            symbol:'pin',
+            symbolSize : function(a){
+                return a[2]==1?0:40;
+            },
+            rippleEffect : {
+                scale : 10,
+                brushType : 'stroke'
+            },
+            hoverAnimation : true,
+            label : {
+                normal : {
+                    formatter : function(a){
+                        return a.value[2];
+                    },
+                    show : true,
+                    position: 'inside',
+                    textStyle:{
+                        color:'#fff'
+                    }
+                }
+            },
+            itemStyle : {
+                normal : {
+                    color : '#00DEFF',
+                    shadowBlur : 10,
+                    shadowColor : '#333'
+                }
+            },
+            zlevel : 2
+        },]
+    };
+	$.get('datas.1.json', function (myJson){
+	    echarts.registerMap('yangzhou', myJson) //注册
+	    optionMap.geo.map = 'yangzhou';
+	    myChart.setOption(optionMap);
+	});
+
+</script>
+</body>
+</html>
