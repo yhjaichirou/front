@@ -15,14 +15,93 @@
 		<!-- 词云 -->
 		<script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
 		<!-- 百度地图 -->
-		<script src="https://api.map.baidu.com/api?v=3.0&ak=USdX04lrIHd8Mvv4CX192daGQGZs4AQF"></script>
-		<script type="text/javascript" src="https://api.map.baidu.com/getscript?v=3.0&ak=USdX04lrIHd8Mvv4CX192daGQGZs4AQF&amp;services=&amp;t=20200927172029"></script>
+		<script src="//bj.bcebos.com/v1/mapopen/api-demos/js/mapStyle.js"></script>
+		<script src="https://api.map.baidu.com/api?type=webgl&v=3.0&ak=4j2KIf9GUUWbS2nIFUyFq7lt84BTPSzb"></script>
+		<!-- <script type="text/javascript" src="https://api.map.baidu.com/getscript?v=3.0&ak=4j2KIf9GUUWbS2nIFUyFq7lt84BTPSzb&amp;services=&amp;t=20200927172029"></script> -->
 		<script src="js/jquery-3.3.1-min.js"></script>
-		<script type="text/javascript" src = "https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<!-- <script type="text/javascript" src = "https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js"></script> -->
 		<script src="js/turn.js"></script>
 		<script>if (!!window.ActiveXObject || 'ActiveXObject' in window) {
             window.location.href = 'https://www.aidjyun.com/error.html'
         }</script>
+		   <style type="text/css">
+		            html, body, #allmap {
+		                width: 100%;
+		                height: 100%;
+		                margin: 0;
+		                padding: 0;
+		            }
+		            
+		            .wave-wapper {
+		                position: absolute; 
+		                top: 0; 
+		                left: 0;
+		                z-index: -7982821;
+		            }
+		            
+		            .item {
+		                position: absolute;
+		                color: inherit;
+		                background-color: blue;
+		                border-radius: 50%;
+		                border: 1px solid blue;
+		            }
+		            
+		            .item1 {
+		                width: 25px;
+		                height: 10px;
+		                left: 12px;
+		                top: 19px;
+		                -webkit-animation: wave 2s infinite ease-in;
+		                animation: wave 2s infinite ease-in;
+		                -webkit-animation-delay: 0s; 
+		                animation-delay: 0s;
+		                mask: radial-gradient(transparent 30%, #000 30%);
+		                -webkit-mask: radial-gradient(transparent 30%, #000 30%);
+		            }
+		            
+		            .item2 {
+		                width: 54px;
+		                height: 25px;
+		                left: -3px;
+		                top: 12px;
+		                -webkit-animation: wave 2s infinite ease-in;
+		                animation: wave 2s infinite ease-in;
+		                -webkit-animation-delay: 0s;
+		                animation-delay: 0s;
+		                opacity: 0;
+		                mask: radial-gradient(transparent 55%, #000 55%);
+		                -webkit-mask: radial-gradient(transparent 48%, #000 48%);
+		            }
+		            
+		            @-webkit-keyframes wave {
+		                from {
+		                    -webkit-transform: scale(0);
+		                    transform: scale(0);
+		                    opacity: 1;
+		                }
+		                to {
+		                    -webkit-transform: scale(1);
+		                    transform: scale(1);
+		                    opacity: 0;
+		                }
+		            }
+		            
+		            @keyframes wave {
+		                from {
+		                    -webkit-transform: scale(0);
+		                    transform: scale(0);
+		                    opacity: 1;
+		                }
+		                to {
+		                    -webkit-transform: scale(1);
+		                    transform: scale(1);
+		                    opacity: 0;
+		                }
+		            }
+		            
+		        </style>
 		<style>
 			/* 富文本样式覆盖，暂时解决可以改字体大小、颜色的问题 */
 			.bf-font-size-dropdown .dropdown-content {
@@ -2988,8 +3067,8 @@
 						<div class="active_0">组织概况</div>
 						<div>党员队伍</div>
 						<div>基层组织</div>
-						<div>党务工作</div>
-						<div>思想建设</div>
+					<!-- 	<div>党务工作</div>
+						<div>思想建设</div> -->
 						<div>支部地图</div><img class="" src="data:image/png;base64,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">
 					</div>
 				</div>
